@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Consume — McKinley Park, Chicago</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf6ef;
+      --warm-white: #fff9f2;
+      --espresso: #2c1810;
+      --caramel: #c47b2b;
+      --caramel-light: #e8a84a;
+      --mocha: #6b3d2e;
+      --sage: #7a8c6e;
+      --text-dark: #1a1008;
+      --text-mid: #4a3020;
+      --text-light: #8a7060;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(44, 24, 16, 0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--caramel-light);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--caramel-light); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--espresso);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://media.base44.com/images/public/69eb8e155b7e908f4990d537/72399dc3f_generated_image.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--caramel-light);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(250, 246, 239, 0.75);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      background: rgba(196, 123, 43, 0.2);
+      border: 1px solid rgba(196, 123, 43, 0.4);
+      color: var(--caramel-light);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--caramel);
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.1s;
+      margin: 0.3rem;
+    }
+
+    .btn-primary:hover { background: var(--caramel-light); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid rgba(250, 246, 239, 0.4);
+      color: var(--cream);
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, background 0.2s;
+      margin: 0.3rem;
+    }
+
+    .btn-outline:hover { border-color: var(--caramel-light); background: rgba(196, 123, 43, 0.1); }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(250,246,239,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* HOURS STRIP */
+    .hours-strip {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hours-strip .dot { color: var(--caramel); font-size: 1.2rem; }
+
+    /* STORY */
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--espresso);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-text p {
+      color: var(--text-mid);
+      line-height: 1.85;
+      font-size: 1.02rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .story-image {
+      position: relative;
+    }
+
+    .story-image-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .story-card {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -2rem;
+      background: var(--caramel);
+      color: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      max-width: 200px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .story-card strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* MENU */
+    .menu-section {
+      background: var(--espresso);
+      padding: 6rem 2rem;
+    }
+
+    .menu-section .section-title { color: var(--cream); }
+    .menu-section .section-label { color: var(--caramel-light); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .menu-category {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+
+    .menu-category h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--caramel-light);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(196, 123, 43, 0.3);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .menu-item-info { flex: 1; }
+
+    .menu-item-name {
+      color: var(--cream);
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .menu-item-desc {
+      color: rgba(250,246,239,0.5);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .menu-item-price {
+      color: var(--caramel-light);
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .menu-note {
+      color: rgba(250,246,239,0.45);
+      font-size: 0.78rem;
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+
+    /* VIBE / FEATURES */
+    .vibe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .vibe-card {
+      padding: 2rem;
+      background: var(--warm-white);
+      border-radius: 8px;
+      border: 1px solid rgba(44, 24, 16, 0.08);
+    }
+
+    .vibe-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .vibe-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--espresso);
+      margin-bottom: 0.6rem;
+    }
+
+    .vibe-card p {
+      color: var(--text-light);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    /* LOCATION */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hours-table { width: 100%; margin-top: 1.5rem; }
+    .hours-table tr td {
+      padding: 0.6rem 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(44,24,16,0.06);
+    }
+    .hours-table tr td:first-child {
+      font-weight: 600;
+      color: var(--espresso);
+      width: 120px;
+    }
+    .hours-table tr td:last-child { color: var(--text-mid); }
+    .closed { color: var(--text-light) !important; font-style: italic; }
+
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 8px;
+      overflow: hidden;
+      border: none;
+    }
+
+    .address-block {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--warm-white);
+      border-radius: 8px;
+      border-left: 3px solid var(--caramel);
+    }
+
+    .address-block p {
+      color: var(--text-mid);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    /* CHATBOT */
+    #chat-toggle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 60px;
+      height: 60px;
+      background: var(--caramel);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(196, 123, 43, 0.5);
+      z-index: 200;
+      transition: transform 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #chat-toggle:hover { background: var(--caramel-light); transform: scale(1.05); }
+
+    #chat-window {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.5rem;
+      width: 360px;
+      max-height: 500px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(44, 24, 16, 0.25);
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    #chat-window.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .chat-header {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chat-header-avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--caramel);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .chat-header-info { flex: 1; }
+    .chat-header-name { font-weight: 600; font-size: 0.9rem; }
+    .chat-header-status { font-size: 0.72rem; color: rgba(250,246,239,0.6); }
+
+    .chat-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      background: #fafaf8;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .msg.bot {
+      background: var(--cream);
+      color: var(--text-dark);
+      border: 1px solid rgba(44,24,16,0.08);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg.user {
+      background: var(--caramel);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg.typing { opacity: 0.6; font-style: italic; }
+
+    .chat-suggestions {
+      padding: 0.5rem 1rem 0;
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-chip {
+      background: var(--cream);
+      border: 1px solid rgba(196, 123, 43, 0.3);
+      color: var(--caramel);
+      padding: 0.3rem 0.7rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .suggestion-chip:hover { background: rgba(196,123,43,0.1); }
+
+    .chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      border-top: 1px solid rgba(44,24,16,0.08);
+      background: white;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1px solid rgba(44,24,16,0.15);
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus { border-color: var(--caramel); }
+
+    .chat-send {
+      background: var(--caramel);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .chat-send:hover { background: var(--caramel-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--caramel-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-tagline {
+      color: rgba(250,246,239,0.5);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: rgba(250,246,239,0.6);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--caramel-light); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      color: rgba(250,246,239,0.3);
+      font-size: 0.75rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .story-grid, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-card { display: none; }
+      .vibe-grid { grid-template-columns: 1fr; }
+      #chat-window { width: calc(100vw - 3rem); right: 1.5rem; }
+      .hours-strip { gap: 1rem; font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Café Consume</div>
+    <ul class="nav-links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#vibe">Experience</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">☕ McKinley Park, Chicago</p>
+      <h1 class="hero-title">Coffee with<br />soul.</h1>
+      <p class="hero-sub">A family-run café on Western Ave where the kitchen is open, the coffee is real, and every visit feels like home.</p>
+      <div class="hero-badges">
+        <span class="badge">Family-Owned</span>
+        <span class="badge">Open Kitchen</span>
+        <span class="badge">Handmade Syrups</span>
+        <span class="badge">Café + Vintage</span>
+      </div>
+      <div>
+        <a href="#menu" class="btn-primary">See the Menu</a>
+        <a href="#visit" class="btn-outline">Find Us</a>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>scroll</span>
+      <svg width="12" height="16" viewBox="0 0 12 16" fill="none"><path d="M6 0v14M1 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- HOURS STRIP -->
+  <div class="hours-strip">
+    <span class="dot">●</span>
+    <span><strong>Open Today</strong> — Fri–Mon · 7am to 3pm</span>
+    <span class="dot">●</span>
+    <span>3452 S Western Ave, Chicago IL 60608</span>
+    <span class="dot">●</span>
+    <span>Closed Tue–Thu</span>
+  </div>
+
+  <!-- STORY -->
+  <section class="section" id="story">
+    <div class="section-inner story-grid">
+      <div class="story-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">A kitchen at home<br />on Western Ave.</h2>
+        <p>Café Consume was born from a gut feeling. Andrés Merlos wanted the coffee shop he'd always been looking for — one that felt alive, messy in the best way, and genuinely connected to the people in it.</p>
+        <p>There's no wall separating the kitchen from the café. Customers watch espresso being pulled, hear bacon sizzling, and see the daily rhythm of a real working kitchen. That openness is the whole point.</p>
+        <p>Every detail is intentional — the barn-find stools from Muskegon, Michigan; the bourbon vanilla bean syrup made in-house; the dark chocolate mocha sauce ground from kilo bricks. The bread comes from a local baker, the bacon from a trusted butcher.</p>
+        <p>Next door, brother Guillermo and their mother Olga run <strong>Consume Vintage</strong> — curated secondhand finds with the same love for discovery that runs through everything the family does.</p>
+      </div>
+      <div class="story-image">
+        <div style="width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,#3d1f13,#6b3d2e);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;color:rgba(250,246,239,0.4);">
+            <div style="font-size:4rem;margin-bottom:1rem;">☕</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.2rem;">Café Consume</div>
+            <div style="font-size:0.8rem;margin-top:0.3rem;">Est. McKinley Park</div>
+          </div>
+        </div>
+        <div class="story-card">
+          <strong>Family Run</strong>
+          Andrés, Guillermo & Olga Merlos
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="section-inner">
+      <p class="section-label">What We Serve</p>
+      <h2 class="section-title">Small menu.<br />Big punch.</h2>
+      <div class="menu-grid">
+
+        <div class="menu-category">
+          <h3>☕ Espresso & Coffee</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Café Miel</div>
+              <div class="menu-item-desc">Espresso, steamed milk, honey, cinnamon. A signature favorite.</div>
+            </div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Mocha</div>
+              <div class="menu-item-desc">Rich dark chocolate sauce made in-house from kilo bricks.</div>
+            </div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Vanilla Latte</div>
+              <div class="menu-item-desc">House-made bourbon vanilla bean syrup.</div>
+            </div>
+            <div class="menu-item-price">$5.75</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Drip Coffee</div>
+              <div class="menu-item-desc">Classic. Always fresh.</div>
+            </div>
+            <div class="menu-item-price">$3.50</div>
+          </div>
+          <p class="menu-note">Hot or iced on any drink. Ask about seasonal specials.</p>
+        </div>
+
+        <div class="menu-category">
+          <h3>🥚 Food</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Bacon, Egg & Cheese</div>
+              <div class="menu-item-desc">On a bagel or croissant. Our most loved sandwich.</div>
+            </div>
+            <div class="menu-item-price">$9.00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Sausage, Egg & Cheese</div>
+              <div class="menu-item-desc">Smashburger-style prep. Seriously good.</div>
+            </div>
+            <div class="menu-item-price">$9.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Almendra Croissant</div>
+              <div class="menu-item-desc">Almond croissant from our local baker. Pairs perfectly with a Café Miel.</div>
+            </div>
+            <div class="menu-item-price">$4.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Seasonal Pastries</div>
+              <div class="menu-item-desc">Ask what's in today. Fresh daily from local bakers.</div>
+            </div>
+            <div class="menu-item-price">Varies</div>
+          </div>
+          <p class="menu-note">Butcher-sourced bacon. Local bread. Made with care.</p>
+        </div>
+
+        <div class="menu-category">
+          <h3>🧋 Other Drinks</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Matcha Latte</div>
+              <div class="menu-item-desc">Ceremonial grade, steamed oat or whole milk.</div>
+            </div>
+            <div class="menu-item-price">$5.75</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Hot Chocolate</div>
+              <div class="menu-item-desc">Made with the same rich dark chocolate as our mocha.</div>
+            </div>
+            <div class="menu-item-price">$5.00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Seasonal Lemonade</div>
+              <div class="menu-item-desc">Rotating seasonal flavors. House-made.</div>
+            </div>
+            <div class="menu-item-price">$4.50</div>
+          </div>
+          <p class="menu-note">Dairy-free milk options available. Just ask!</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VIBE -->
+  <section class="section" id="vibe">
+    <div class="section-inner">
+      <p class="section-label">The Experience</p>
+      <h2 class="section-title">More than coffee.</h2>
+      <div class="vibe-grid">
+        <div class="vibe-card">
+          <div class="vibe-icon">🔓</div>
+          <h3>Open Kitchen</h3>
+          <p>No wall between you and the cooking. Watch espresso get pulled, hear bacon sizzle. Coffee becomes a shared experience.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">✋</div>
+          <h3>Made By Hand</h3>
+          <p>Bourbon vanilla bean syrup. Dark chocolate mocha sauce. House-made, every day. The difference is in every sip.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🏘️</div>
+          <h3>South Side Roots</h3>
+          <p>Family-owned for generations. McKinley Park is home, and this café is built for the neighbors who make it feel like it.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🪑</div>
+          <h3>Barn-Find Character</h3>
+          <p>The stools came from a barn in Muskegon, Michigan. Every corner of this space was found, restored, and given new life.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">👗</div>
+          <h3>Café + Vintage</h3>
+          <p>Step next door into Consume Vintage — curated secondhand finds. Two doors, one ritual. Coffee and a treasure hunt.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🌿</div>
+          <h3>Outdoor Patio</h3>
+          <p>Coming soon: live shows, marketplaces, workshops. A space for people with good ideas to bring them to life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="section" id="visit" style="background: var(--warm-white);">
+    <div class="section-inner location-grid">
+      <div>
+        <p class="section-label">Find Us</p>
+        <h2 class="section-title">Come say hi.</h2>
+        <table class="hours-table">
+          <tr><td>Friday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Saturday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Sunday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Monday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Tuesday</td><td class="closed">Closed</td></tr>
+          <tr><td>Wednesday</td><td class="closed">Closed</td></tr>
+          <tr><td>Thursday</td><td class="closed">Closed</td></tr>
+        </table>
+        <div class="address-block">
+          <p>
+            📍 <strong>3452 S Western Ave</strong><br />
+            Chicago, IL 60608<br />
+            McKinley Park neighborhood
+          </p>
+          <p style="margin-top:0.8rem;">
+            📸 <a href="https://instagram.com/cafeconsume" target="_blank" style="color:var(--caramel);text-decoration:none;">@cafeconsume</a> on Instagram
+          </p>
+        </div>
+      </div>
+      <div>
+        <iframe
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2974.5!2d-87.6836!3d41.8320!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c6b3fbdb6e9%3A0x5e9b02d5e03b9b6e!2s3452%20S%20Western%20Ave%2C%20Chicago%2C%20IL%2060608!5e0!3m2!1sen!2sus!4v1234567890"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Café Consume</div>
+    <p class="footer-tagline">Coffee with soul. McKinley Park, Chicago.</p>
+    <div class="footer-links">
+      <a href="#story">Our Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#visit">Visit</a>
+      <a href="https://instagram.com/cafeconsume" target="_blank">Instagram</a>
+      <a href="https://linktr.ee/consumechicago" target="_blank">Linktree</a>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Café Consume · 3452 S Western Ave, Chicago IL · Fri–Mon 7am–3pm
+    </div>
+  </footer>
+
+  <!-- CHATBOT TOGGLE -->
+  <button id="chat-toggle" aria-label="Open chat">☕</button>
+
+  <!-- CHATBOT WINDOW -->
+  <div id="chat-window">
+    <div class="chat-header">
+      <div class="chat-header-avatar">☕</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Ask our barista</div>
+        <div class="chat-header-status">Usually answers in seconds</div>
+      </div>
+      <button onclick="closeChat()" style="background:none;border:none;color:rgba(250,246,239,0.5);font-size:1.1rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="msg bot">Hey! 👋 I'm your virtual barista at Café Consume. Ask me anything — hours, menu, what to order, or how to find us!</div>
+    </div>
+    <div class="chat-suggestions" id="suggestions">
+      <button class="suggestion-chip" onclick="askSuggestion(this)">What are your hours?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">What's good here?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">Where are you located?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">Do you have vegan options?</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything..." onkeydown="handleKey(event)" />
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // ---- CHATBOT LOGIC ----
+    const chatData = {
+      hours: {
+        keywords: ['hour','open','close','when','time','schedule','day','fri','sat','sun','mon','tue','wed','thu'],
+        answer: "We're open Friday through Monday, 7am to 3pm. Closed Tuesday, Wednesday, and Thursday. Come early — the morning rush is worth it! ☕"
+      },
+      location: {
+        keywords: ['where','location','address','find','directions','map','get to','western','mckinley','park','neighborhood'],
+        answer: "We're at 3452 S Western Ave in McKinley Park, Chicago (60608). Super easy to spot — we're right on Western Ave. Street parking available! 📍"
+      },
+      menu: {
+        keywords: ['menu','food','eat','drink','what do you','serve','offer','have'],
+        answer: "Our menu is small but mighty! We've got espresso drinks (the Café Miel is a must-try), lattes with house-made syrups, hot chocolate, and breakfast sandwiches — bacon egg & cheese or sausage egg & cheese on a bagel or croissant. Plus pastries from local bakers. 🥐"
+      },
+      recommend: {
+        keywords: ['recommend','suggest','best','favorite','popular','order','try','good','what should'],
+        answer: "Hands down, the Café Miel — espresso, honey, cinnamon, steamed milk. Pair it with an almendra (almond) croissant. If you're hungry, the bacon egg & cheese on a croissant is legendary. 🏆"
+      },
+      vegan: {
+        keywords: ['vegan','vegetarian','dairy free','dairy-free','plant','oat milk','almond milk','milk option'],
+        answer: "Yes! We offer dairy-free milk options (oat milk, almond milk) for all our drinks. Just ask! The almendra croissant and seasonal pastries can also be a good call — just check with us on the day. 🌱"
+      },
+      story: {
+        keywords: ['story','history','family','owner','andrés','andres','guillermo','olga','who','founded','started','vintage'],
+        answer: "Café Consume is run by brothers Andrés and Guillermo Merlos and their mom Olga. Andrés opened it after years in the vintage world — he wanted a café that felt like a home kitchen. Next door is Consume Vintage, the original family shop. Pure South Side soul. ❤️"
+      },
+      parking: {
+        keywords: ['park','parking','lot','garage','bus','transit','cta','train'],
+        answer: "Street parking is available on Western Ave. For transit, the 49 Western bus stops right nearby. Easy to get to from anywhere on the South Side! 🚌"
+      },
+      patio: {
+        keywords: ['patio','outdoor','outside','seating','sit','seating'],
+        answer: "We have a patio and Andrés has big dreams for it — think live shows, markets, workshops. Keep an eye on our Instagram @cafeconsume for updates! 🌿"
+      },
+      price: {
+        keywords: ['price','cost','how much','cheap','expensive','dollar'],
+        answer: "Super reasonable! Coffee drinks run $3.50–$6, sandwiches are around $9–$9.50, and pastries are $4–$5. A full breakfast + coffee under $15 is pretty hard to beat in Chicago. 💰"
+      },
+      instagram: {
+        keywords: ['instagram','social','follow','ig','post','photo'],
+        answer: "Follow us at @cafeconsume on Instagram for daily updates, specials, and good vibes from the café. 📸"
+      }
+    };
+
+    function matchAnswer(input) {
+      const lower = input.toLowerCase();
+      for (const key in chatData) {
+        if (chatData[key].keywords.some(k => lower.includes(k))) {
+          return chatData[key].answer;
+        }
+      }
+      return "Great question! The best way to get the full scoop is to swing by or DM us on Instagram at @cafeconsume. We're at 3452 S Western Ave, open Fri–Mon 7am–3pm. ☕";
+    }
+
+    function appendMsg(text, type) {
+      const body = document.getElementById('chat-body');
+      const div = document.createElement('div');
+      div.className = 'msg ' + type;
+      div.textContent = text;
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      return div;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      document.getElementById('suggestions').style.display = 'none';
+      appendMsg(text, 'user');
+      input.value = '';
+
+      const typing = appendMsg('Typing...', 'bot typing');
+      setTimeout(() => {
+        typing.remove();
+        appendMsg(matchAnswer(text), 'bot');
+      }, 700);
+    }
+
+    function askSuggestion(el) {
+      document.getElementById('chat-input').value = el.textContent;
+      document.getElementById('suggestions').style.display = 'none';
+      sendMessage();
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter') sendMessage();
+    }
+
+    const toggle = document.getElementById('chat-toggle');
+    const win = document.getElementById('chat-window');
+
+    toggle.addEventListener('click', () => {
+      win.classList.toggle('open');
+    });
+
+    function closeChat() {
+      win.classList.remove('open');
+    }
+
+    // Smooth nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + 120;
+      sections.forEach(s => {
+        const top = s.offsetTop;
+        const bot = top + s.offsetHeight;
+        if (y >= top && y < bot) {
+          document.querySelectorAll('.nav-links a').forEach(a => {
+            a.style.color = '';
+            if (a.getAttribute('href') === '#' + s.id) {
+              a.style.color = 'var(--caramel-light)';
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
