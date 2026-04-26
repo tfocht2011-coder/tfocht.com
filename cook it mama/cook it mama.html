@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cook It Mama Cafe — Soul Food in Bridgeport, Chicago</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f2;
+      --warm-white: #fff9f4;
+      --deep-red: #8b1a1a;
+      --red: #b22222;
+      --gold: #d4a017;
+      --gold-light: #e8b84a;
+      --brown: #5c3317;
+      --text-dark: #1a0a00;
+      --text-mid: #3d1f0f;
+      --text-light: #8a6050;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(139, 26, 26, 0.95);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold-light); letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(253,248,242,0.85); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--deep-red); }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://media.base44.com/images/public/69eb8e155b7e908f4990d537/b5d1f3c9f_generated_image.png'); background-size: cover; background-position: center; opacity: 0.3; }
+    .hero-content { position: relative; text-align: center; padding: 2rem; max-width: 720px; }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.2rem; font-weight: 500; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1.2rem; }
+    .hero-sub { font-size: 1.1rem; color: rgba(253,248,242,0.75); line-height: 1.7; max-width: 500px; margin: 0 auto 2rem; }
+    .hero-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .badge { background: rgba(212,160,23,0.2); border: 1px solid rgba(212,160,23,0.4); color: var(--gold-light); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.78rem; letter-spacing: 0.05em; }
+    .btn-primary { display: inline-block; background: var(--gold); color: var(--text-dark); padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; transition: background 0.2s, transform 0.1s; margin: 0.3rem; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline { display: inline-block; border: 1.5px solid rgba(253,248,242,0.4); color: var(--cream); padding: 0.9rem 2.2rem; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; transition: all 0.2s; margin: 0.3rem; }
+    .btn-outline:hover { border-color: var(--gold-light); background: rgba(212,160,23,0.1); }
+    .scroll-cue { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(253,248,242,0.4); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* STRIP */
+    .hours-strip { background: var(--brown); color: var(--cream); padding: 1.1rem 2rem; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; font-size: 0.85rem; letter-spacing: 0.04em; }
+    .hours-strip .dot { color: var(--gold); font-size: 1.1rem; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: 1rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--deep-red); line-height: 1.2; margin-bottom: 1.5rem; }
+
+    /* STORY */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .story-text p { color: var(--text-mid); line-height: 1.85; font-size: 1.02rem; margin-bottom: 1.2rem; }
+    .story-placeholder { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, var(--deep-red), var(--brown)); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; color: rgba(253,248,242,0.35); }
+    .story-placeholder .big-emoji { font-size: 5rem; }
+    .story-placeholder p { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+    .story-card { background: var(--gold); color: var(--text-dark); padding: 1.2rem 1.5rem; border-radius: 4px; margin-top: 1.5rem; display: inline-block; }
+    .story-card strong { font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
+
+    /* MENU */
+    .menu-section { background: var(--deep-red); padding: 6rem 2rem; }
+    .menu-section .section-title { color: var(--cream); }
+    .menu-section .section-label { color: var(--gold-light); }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .menu-category { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2rem; }
+    .menu-category h3 { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.3rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(212,160,23,0.3); }
+    .menu-item { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+    .menu-item-info { flex: 1; }
+    .menu-item-name { color: var(--cream); font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .menu-item-desc { color: rgba(253,248,242,0.5); font-size: 0.78rem; line-height: 1.5; }
+    .menu-item-price { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    .menu-note { color: rgba(253,248,242,0.4); font-size: 0.78rem; margin-top: 1.5rem; font-style: italic; }
+
+    /* CATERING */
+    .catering-box { background: var(--warm-white); border: 1px solid rgba(139,26,26,0.1); border-left: 4px solid var(--red); border-radius: 8px; padding: 2.5rem; max-width: 700px; margin: 3rem auto 0; text-align: center; }
+    .catering-box h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--deep-red); margin-bottom: 0.8rem; }
+    .catering-box p { color: var(--text-mid); line-height: 1.7; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+    /* VIBE */
+    .vibe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .vibe-card { padding: 2rem; background: var(--warm-white); border-radius: 8px; border: 1px solid rgba(139,26,26,0.08); }
+    .vibe-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .vibe-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--deep-red); margin-bottom: 0.6rem; }
+    .vibe-card p { color: var(--text-light); font-size: 0.88rem; line-height: 1.7; }
+
+    /* LOCATION */
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hours-table { width: 100%; margin-top: 1.5rem; }
+    .hours-table tr td { padding: 0.6rem 0; font-size: 0.92rem; border-bottom: 1px solid rgba(139,26,26,0.06); }
+    .hours-table tr td:first-child { font-weight: 600; color: var(--deep-red); width: 120px; }
+    .hours-table tr td:last-child { color: var(--text-mid); }
+    .closed { color: var(--text-light) !important; font-style: italic; }
+    .map-embed { width: 100%; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; border: none; }
+    .address-block { margin-top: 2rem; padding: 1.5rem; background: var(--warm-white); border-radius: 8px; border-left: 3px solid var(--red); }
+    .address-block p { color: var(--text-mid); font-size: 0.92rem; line-height: 1.8; }
+
+    /* CHATBOT */
+    #chat-toggle { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 60px; height: 60px; background: var(--red); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 20px rgba(178,34,34,0.5); z-index: 200; transition: transform 0.2s, background 0.2s; display: flex; align-items: center; justify-content: center; }
+    #chat-toggle:hover { background: var(--deep-red); transform: scale(1.05); }
+    #chat-window { position: fixed; bottom: 5.5rem; right: 1.5rem; width: 360px; max-height: 500px; background: white; border-radius: 16px; box-shadow: 0 8px 40px rgba(139,26,26,0.25); display: flex; flex-direction: column; z-index: 200; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity 0.25s, transform 0.25s; }
+    #chat-window.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .chat-header { background: var(--deep-red); color: var(--cream); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .chat-header-avatar { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark); }
+    .chat-header-info { flex: 1; }
+    .chat-header-name { font-weight: 600; font-size: 0.9rem; }
+    .chat-header-status { font-size: 0.72rem; color: rgba(253,248,242,0.6); }
+    .chat-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.7rem; background: #fafaf8; }
+    .msg { max-width: 85%; padding: 0.65rem 0.9rem; border-radius: 12px; font-size: 0.85rem; line-height: 1.5; }
+    .msg.bot { background: var(--cream); color: var(--text-dark); border: 1px solid rgba(139,26,26,0.08); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg.user { background: var(--red); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg.typing { opacity: 0.6; font-style: italic; }
+    .chat-suggestions { padding: 0.5rem 1rem 0; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .suggestion-chip { background: var(--cream); border: 1px solid rgba(178,34,34,0.3); color: var(--red); padding: 0.3rem 0.7rem; border-radius: 100px; font-size: 0.72rem; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .suggestion-chip:hover { background: rgba(178,34,34,0.08); }
+    .chat-input-row { display: flex; gap: 0.5rem; padding: 0.8rem; border-top: 1px solid rgba(139,26,26,0.08); background: white; }
+    .chat-input { flex: 1; border: 1px solid rgba(139,26,26,0.15); border-radius: 8px; padding: 0.55rem 0.8rem; font-size: 0.85rem; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+    .chat-input:focus { border-color: var(--red); }
+    .chat-send { background: var(--red); color: white; border: none; border-radius: 8px; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .chat-send:hover { background: var(--deep-red); }
+
+    /* FOOTER */
+    footer { background: var(--deep-red); color: var(--cream); padding: 3rem 2rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold-light); margin-bottom: 0.8rem; }
+    .footer-tagline { color: rgba(253,248,242,0.5); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .footer-links a { color: rgba(253,248,242,0.6); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; color: rgba(253,248,242,0.3); font-size: 0.75rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .story-grid, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .vibe-grid { grid-template-columns: 1fr; }
+      #chat-window { width: calc(100vw - 3rem); right: 1.5rem; }
+      .hours-strip { gap: 1rem; font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Cook It Mama Cafe</div>
+    <ul class="nav-links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#catering">Catering</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">❤️ Soul Food · Bridgeport, Chicago</p>
+      <h1 class="hero-title">Soul full<br />food.</h1>
+      <p class="hero-sub">A Black-owned neighborhood cafe serving bold, homemade soul food — jerk chicken, hearty sandwiches, and food made with love right in the heart of Bridgeport.</p>
+      <div class="hero-badges">
+        <span class="badge">Black-Owned</span>
+        <span class="badge">Made Fresh Daily</span>
+        <span class="badge">Catering Available</span>
+        <span class="badge">South Side Proud</span>
+      </div>
+      <div>
+        <a href="#menu" class="btn-primary">See the Menu</a>
+        <a href="#catering" class="btn-outline">Book Catering</a>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>scroll</span>
+      <svg width="12" height="16" viewBox="0 0 12 16" fill="none"><path d="M6 0v14M1 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- HOURS STRIP -->
+  <div class="hours-strip">
+    <span class="dot">●</span>
+    <span><strong>Open Today</strong> — Tue–Fri 11am–4pm · Sat 11am–2pm</span>
+    <span class="dot">●</span>
+    <span>545 W 31st St, Bridgeport, Chicago</span>
+    <span class="dot">●</span>
+    <span>Closed Sun & Mon</span>
+  </div>
+
+  <!-- STORY -->
+  <section class="section" id="story">
+    <div class="section-inner story-grid">
+      <div class="story-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Food made<br />with love.</h2>
+        <p>Cook It Mama Cafe is the creation of Sydney Blakely — owner, cooker, worker, and janitor, all in one. She opened this cozy Bridgeport spot to bring real, homemade soul food to the South Side.</p>
+        <p>Everything on the menu is made fresh with bold flavors and a free-spirited energy that makes every visit feel like eating at someone's kitchen — because in a lot of ways, it is.</p>
+        <p>From the signature jerk chicken to hearty subs and loaded nachos, Mama puts care into every plate. This isn't fast food — it's food that takes its time and shows it.</p>
+        <div class="story-card">
+          <strong>Sydney Blakely</strong>
+          Owner & Head Cook
+        </div>
+      </div>
+      <div class="story-placeholder">
+        <div class="big-emoji">🍗</div>
+        <p>Cook It Mama Cafe</p>
+        <p style="font-size:0.8rem;">Bridgeport, Chicago</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="section-inner">
+      <p class="section-label">What We're Cooking</p>
+      <h2 class="section-title">Bold flavors.<br />Every day.</h2>
+      <div class="menu-grid">
+
+        <div class="menu-category">
+          <h3>🌶️ Jerk Chicken Favorites</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Toya's Jerk Chicken Salad</div>
+              <div class="menu-item-desc">Jerk-marinated chicken, fresh greens, red onion, Colby jack, boiled egg, tomato.</div>
+            </div>
+            <div class="menu-item-price">$12</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Jerk Chicken Tacos</div>
+              <div class="menu-item-desc">Our signature jerk seasoning, tucked into warm tacos. A crowd favorite.</div>
+            </div>
+            <div class="menu-item-price">$11</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">That's Not Yo Cheese Jerk Nachos</div>
+              <div class="menu-item-desc">Loaded nachos with jerk chicken, bold cheese sauce, fresh toppings. Staff favorite.</div>
+            </div>
+            <div class="menu-item-price">$13</div>
+          </div>
+          <p class="menu-note">Ask about the heat level — we can go mild or turn it up 🔥</p>
+        </div>
+
+        <div class="menu-category">
+          <h3>🥪 Sandwiches & Subs</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Queen T's Submarine</div>
+              <div class="menu-item-desc">A loaded sub packed with fresh ingredients. One of our most loved orders.</div>
+            </div>
+            <div class="menu-item-price">$12</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Spicy Turkey Sandwich</div>
+              <div class="menu-item-desc">Bold, filling, and satisfying. Great lunch option.</div>
+            </div>
+            <div class="menu-item-price">$11</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Salmon Panini</div>
+              <div class="menu-item-desc">Fresh salmon, pressed and grilled. A lighter option with serious flavor.</div>
+            </div>
+            <div class="menu-item-price">$13</div>
+          </div>
+          <p class="menu-note">All sandwiches made fresh to order.</p>
+        </div>
+
+        <div class="menu-category">
+          <h3>🥤 Drinks & Extras</h3>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Red Pineapple Squirt</div>
+              <div class="menu-item-desc">Our most-talked-about drink. Sweet, tangy, refreshing.</div>
+            </div>
+            <div class="menu-item-price">$4</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Fresh Lemonade</div>
+              <div class="menu-item-desc">House-made, rotating flavors. Ask what's in today.</div>
+            </div>
+            <div class="menu-item-price">$4</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Soups (Seasonal)</div>
+              <div class="menu-item-desc">Rotating homestyle soups. Comfort in a bowl.</div>
+            </div>
+            <div class="menu-item-price">$7</div>
+          </div>
+          <p class="menu-note">Vegetarian options available. Just ask!</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CATERING -->
+  <section class="section" id="catering">
+    <div class="section-inner">
+      <p class="section-label">Events & Catering</p>
+      <h2 class="section-title" style="text-align:center;">Bring Mama's cooking<br />to your event.</h2>
+      <div class="catering-box">
+        <h3>🍽️ Catering Available</h3>
+        <p>Whether it's a birthday, block party, office lunch, or family gathering — Cook It Mama Cafe brings the soul food to you. Fresh, bold, made-to-order catering for any size event.</p>
+        <p>Reach out on Instagram or call us to discuss your event and get a custom quote.</p>
+        <a href="https://instagram.com/cookitmamacafe" target="_blank" class="btn-primary">DM us on Instagram</a>
+        &nbsp;
+        <a href="tel:3126872883" class="btn-outline" style="color:var(--red);border-color:var(--red);">Call (312) 687-2883</a>
+      </div>
+
+      <!-- VIBE CARDS -->
+      <div class="vibe-grid" style="margin-top:4rem;">
+        <div class="vibe-card">
+          <div class="vibe-icon">✊🏾</div>
+          <h3>Black-Owned & Proud</h3>
+          <p>Cook It Mama is part of the South Side's rich tradition of community-driven, Black-owned businesses. Every dollar goes back into the neighborhood.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🍗</div>
+          <h3>Made Fresh Daily</h3>
+          <p>No shortcuts. Everything is cooked fresh each day by Sydney and her team. The flavors are bold because the care is real.</p>
+        </div>
+        <div class="vibe-card">
+          <div class="vibe-icon">🌶️</div>
+          <h3>Signature Jerk Seasoning</h3>
+          <p>The jerk chicken is the star. A special marinade with heat, herbs, and depth — you won't find it anywhere else on the South Side.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="section" id="visit" style="background: var(--warm-white);">
+    <div class="section-inner location-grid">
+      <div>
+        <p class="section-label">Find Us</p>
+        <h2 class="section-title">Come hungry.</h2>
+        <table class="hours-table">
+          <tr><td>Monday</td><td class="closed">Closed</td></tr>
+          <tr><td>Tuesday</td><td>11:00 am – 4:00 pm</td></tr>
+          <tr><td>Wednesday</td><td>11:00 am – 4:00 pm</td></tr>
+          <tr><td>Thursday</td><td>11:00 am – 4:00 pm</td></tr>
+          <tr><td>Friday</td><td>11:00 am – 4:00 pm</td></tr>
+          <tr><td>Saturday</td><td>11:00 am – 2:00 pm</td></tr>
+          <tr><td>Sunday</td><td class="closed">Closed</td></tr>
+        </table>
+        <div class="address-block">
+          <p>
+            📍 <strong>545 W 31st St</strong><br />
+            Chicago, IL 60616<br />
+            Bridgeport neighborhood
+          </p>
+          <p style="margin-top:0.8rem;">
+            📞 <a href="tel:3126872883" style="color:var(--red);text-decoration:none;">(312) 687-2883</a>
+          </p>
+          <p style="margin-top:0.4rem;">
+            📸 <a href="https://instagram.com/cookitmamacafe" target="_blank" style="color:var(--red);text-decoration:none;">@cookitmamacafe</a>
+          </p>
+        </div>
+      </div>
+      <div>
+        <iframe
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2974.9!2d-87.6388!3d41.8380!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c2b2b2b2b2b%3A0x2b2b2b2b2b2b2b2b!2s545%20W%2031st%20St%2C%20Chicago%2C%20IL%2060616!5e0!3m2!1sen!2sus!4v1234567890"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Cook It Mama Cafe</div>
+    <p class="footer-tagline">Soul full food. Bridgeport, Chicago. ❤️</p>
+    <div class="footer-links">
+      <a href="#story">Our Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#catering">Catering</a>
+      <a href="#visit">Visit</a>
+      <a href="https://instagram.com/cookitmamacafe" target="_blank">Instagram</a>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Cook It Mama Cafe · 545 W 31st St, Chicago IL · Tue–Fri 11am–4pm · Sat 11am–2pm
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <button id="chat-toggle" aria-label="Open chat">🍗</button>
+  <div id="chat-window">
+    <div class="chat-header">
+      <div class="chat-header-avatar">🍗</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Ask Mama</div>
+        <div class="chat-header-status">Usually answers in seconds</div>
+      </div>
+      <button onclick="closeChat()" style="background:none;border:none;color:rgba(253,248,242,0.5);font-size:1.1rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="msg bot">Hey! 👋 Welcome to Cook It Mama Cafe. Ask me anything — our menu, hours, catering, or how to find us!</div>
+    </div>
+    <div class="chat-suggestions" id="suggestions">
+      <button class="suggestion-chip" onclick="askSuggestion(this)">What are your hours?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">What's good here?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">Do you cater?</button>
+      <button class="suggestion-chip" onclick="askSuggestion(this)">Where are you located?</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chat-input" type="text" placeholder="Ask anything..." onkeydown="handleKey(event)" />
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const chatData = {
+      hours: {
+        keywords: ['hour','open','close','when','time','schedule','day','tue','wed','thu','fri','sat','sun','mon'],
+        answer: "We're open Tuesday through Friday, 11am–4pm, and Saturday 11am–2pm. Closed Sunday and Monday. Come before we sell out! 🍗"
+      },
+      location: {
+        keywords: ['where','location','address','find','directions','map','31st','bridgeport','neighborhood'],
+        answer: "We're at 545 W 31st St in Bridgeport, Chicago (60616). Right in the heart of the South Side. Street parking available! 📍"
+      },
+      menu: {
+        keywords: ['menu','food','eat','what do you','serve','offer','have','sell'],
+        answer: "We've got bold soul food! Signature jerk chicken — in tacos, salads, and loaded nachos. Plus Queen T's Sub, Spicy Turkey Sandwich, Salmon Panini, and the Red Pineapple Squirt drink. Everything made fresh. 🍗"
+      },
+      recommend: {
+        keywords: ['recommend','suggest','best','favorite','popular','order','try','good','what should'],
+        answer: "The That's Not Yo Cheese Jerk Nachos are legendary. If you want something lighter, Toya's Jerk Chicken Salad is amazing. And do NOT skip the Red Pineapple Squirt drink. 🏆"
+      },
+      catering: {
+        keywords: ['cater','catering','event','party','order','bulk','large','group','birthday','office'],
+        answer: "Yes! Catering is available for any size event — birthdays, block parties, office lunches, you name it. DM us on Instagram @cookitmamacafe or call (312) 687-2883 to get a quote. 🍽️"
+      },
+      vegan: {
+        keywords: ['vegan','vegetarian','dairy','plant','option','gluten'],
+        answer: "We have vegetarian-friendly options! Just ask when you come in and we'll point you in the right direction. The salads are a great starting point. 🌱"
+      },
+      jerk: {
+        keywords: ['jerk','chicken','spicy','hot','mild','heat','seasoning','marinade'],
+        answer: "The jerk chicken is our signature — marinated in a special blend of spices with real heat and depth. You can ask for mild if you're not into spice, but the real experience is letting it kick. 🌶️"
+      },
+      owner: {
+        keywords: ['owner','who','sydney','mama','started','founded','story'],
+        answer: "Cook It Mama Cafe was opened by Sydney Blakely — she's the owner, head cook, and the heart of this whole operation. A proud South Sider making food she loves. ❤️"
+      },
+      phone: {
+        keywords: ['phone','call','number','contact','reach'],
+        answer: "You can call us at (312) 687-2883 or DM on Instagram @cookitmamacafe. We're also on Yelp if you want to leave a review! 📞"
+      }
+    };
+
+    function matchAnswer(input) {
+      const lower = input.toLowerCase();
+      for (const key in chatData) {
+        if (chatData[key].keywords.some(k => lower.includes(k))) return chatData[key].answer;
+      }
+      return "Great question! Best way to get the full scoop is to stop by or DM us on Instagram @cookitmamacafe. We're at 545 W 31st St, open Tue–Fri 11am–4pm, Sat 11am–2pm. ❤️";
+    }
+
+    function appendMsg(text, type) {
+      const body = document.getElementById('chat-body');
+      const div = document.createElement('div');
+      div.className = 'msg ' + type;
+      div.textContent = text;
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      return div;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      document.getElementById('suggestions').style.display = 'none';
+      appendMsg(text, 'user');
+      input.value = '';
+      const typing = appendMsg('Typing...', 'bot typing');
+      setTimeout(() => { typing.remove(); appendMsg(matchAnswer(text), 'bot'); }, 700);
+    }
+
+    function askSuggestion(el) {
+      document.getElementById('chat-input').value = el.textContent;
+      document.getElementById('suggestions').style.display = 'none';
+      sendMessage();
+    }
+
+    function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
+
+    document.getElementById('chat-toggle').addEventListener('click', () => {
+      document.getElementById('chat-window').classList.toggle('open');
+    });
+
+    function closeChat() { document.getElementById('chat-window').classList.remove('open'); }
+  </script>
+</body>
+</html>
